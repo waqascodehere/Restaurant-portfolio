@@ -1,0 +1,1200 @@
+# 🍕 Italiano Pizza and Burgers - Complete Website
+
+Here's a full single-file HTML website with modern design, animations, and all the details you provided:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italiano Pizza and Burgers | Best Fast Food in Rawalpindi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+  
+  :root {
+    --primary: #c41e3a;
+    --primary-dark: #8b0000;
+    --secondary: #ffd700;
+    --dark: #1a1a1a;
+    --light: #f8f5f0;
+    --cream: #faf6f0;
+    --text: #333;
+    --gray: #666;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--light); }
+  ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+  }
+  .navbar.scrolled { padding: 12px 8%; background: rgba(196, 30, 58, 0.98); }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .logo i { color: var(--secondary); font-size: 28px; }
+  .logo span { color: var(--secondary); }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+  }
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    position: relative;
+    transition: 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: 0.3s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--secondary); }
+
+  .nav-btn {
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+    border: 2px solid var(--secondary);
+  }
+  .nav-btn:hover { background: transparent; color: var(--secondary); }
+
+  .menu-toggle {
+    display: none;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+  }
+
+  /* ===== HERO SLIDER ===== */
+  .hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  .slide.active { opacity: 1; }
+  .slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(139,0,0,0.5));
+  }
+  .slide-1 { background: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1600') center/cover; }
+  .slide-2 { background: url('https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=1600') center/cover; }
+  .slide-3 { background: url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1600') center/cover; }
+  .slide-4 { background: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600') center/cover; }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 0 20px;
+    animation: fadeUp 1.2s ease;
+  }
+  .hero-content .badge {
+    display: inline-block;
+    background: rgba(255,215,0,0.2);
+    border: 1px solid var(--secondary);
+    color: var(--secondary);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+  }
+  .hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
+  }
+  .hero-content h1 span { color: var(--secondary); font-style: italic; }
+  .hero-content p {
+    font-size: 19px;
+    margin-bottom: 35px;
+    opacity: 0.95;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(196,30,58,0.4); }
+  .btn-secondary { background: transparent; color: white; border: 2px solid white; }
+  .btn-secondary:hover { background: white; color: var(--dark); transform: translateY(-3px); }
+
+  .slider-controls {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 5;
+  }
+  .slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .slider-dot.active { background: var(--secondary); width: 35px; border-radius: 6px; }
+
+  /* ===== STATS BAR ===== */
+  .stats {
+    background: var(--dark);
+    color: white;
+    padding: 50px 8%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    text-align: center;
+  }
+  .stat-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: var(--secondary);
+    font-weight: 700;
+  }
+  .stat-item p { font-size: 14px; opacity: 0.8; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 100px 8%; }
+  .section-header { text-align: center; margin-bottom: 60px; }
+  .section-header .tag {
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 3px;
+    font-size: 14px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--dark);
+    margin-bottom: 15px;
+  }
+  .section-header p { color: var(--gray); max-width: 600px; margin: 0 auto; font-size: 16px; }
+
+  /* ===== ABOUT ===== */
+  .about { background: white; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about-img {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  }
+  .about-img img { width: 100%; height: 500px; object-fit: cover; display: block; }
+  .about-img .floating-card {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background: white;
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .floating-card i { color: var(--secondary); font-size: 28px; }
+  .floating-card h4 { color: var(--dark); font-size: 18px; }
+  .floating-card p { color: var(--gray); font-size: 13px; }
+  
+  .about-content h2 { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--dark); margin-bottom: 20px; }
+  .about-content h2 span { color: var(--primary); font-style: italic; }
+  .about-content p { color: var(--gray); margin-bottom: 18px; line-height: 1.8; }
+  .features-list { list-style: none; margin: 25px 0; }
+  .features-list li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+  }
+  .features-list i { color: var(--primary); background: rgba(196,30,58,0.1); padding: 8px; border-radius: 50%; }
+
+  /* ===== CATEGORIES ===== */
+  .categories { background: var(--light); }
+  .category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 10px 25px;
+    border: 2px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+  .menu-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.4s;
+    cursor: pointer;
+  }
+  .menu-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(196,30,58,0.2); }
+  .menu-card img { width: 100%; height: 220px; object-fit: cover; transition: 0.5s; }
+  .menu-card:hover img { transform: scale(1.1); }
+  .menu-img { overflow: hidden; position: relative; }
+  .menu-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--primary);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .menu-info { padding: 25px; }
+  .menu-info h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .menu-info p { color: var(--gray); font-size: 14px; margin-bottom: 15px; }
+  .menu-footer { display: flex; justify-content: space-between; align-items: center; }
+  .price { color: var(--primary); font-size: 22px; font-weight: 700; }
+  .price small { font-size: 13px; color: var(--gray); font-weight: 400; }
+  .add-btn {
+    background: var(--primary);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .add-btn:hover { background: var(--primary-dark); transform: rotate(90deg); }
+
+  /* ===== GALLERY ===== */
+  .gallery { background: white; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 250px 250px;
+    gap: 15px;
+  }
+  .gallery-item {
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+  .gallery-item:hover img { transform: scale(1.1); }
+  .gallery-item::after {
+    content: '\f00e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    inset: 0;
+    background: rgba(196,30,58,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    opacity: 0;
+    transition: 0.4s;
+  }
+  .gallery-item:hover::after { opacity: 1; }
+
+  /* ===== SPECIAL OFFER ===== */
+  .special-offer {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .special-offer::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .special-offer h2 { font-family: 'Playfair Display', serif; font-size: 50px; margin-bottom: 15px; position: relative; }
+  .special-offer p { font-size: 18px; max-width: 600px; margin: 0 auto 30px; opacity: 0.9; position: relative; }
+  .offer-box {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 25px 50px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 20px 0;
+    position: relative;
+    animation: pulse 2s infinite;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials { background: var(--light); }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  .testimonial-card {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: relative;
+    transition: 0.3s;
+  }
+  .testimonial-card:hover { transform: translateY(-5px); }
+  .testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 100px;
+    color: rgba(196,30,58,0.1);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+  }
+  .stars { color: var(--secondary); margin-bottom: 15px; }
+  .testimonial-card p { color: var(--gray); line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 15px; }
+  .reviewer img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+  .reviewer h4 { font-size: 16px; color: var(--dark); }
+  .reviewer span { font-size: 13px; color: var(--gray); }
+
+  /* ===== SERVICES ===== */
+  .services { background: white; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+  }
+  .service-card {
+    text-align: center;
+    padding: 40px 25px;
+    border-radius: 20px;
+    background: var(--light);
+    transition: 0.4s;
+    border: 2px solid transparent;
+  }
+  .service-card:hover {
+    background: white;
+    border-color: var(--primary);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(196,30,58,0.15);
+  }
+  .service-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 20px;
+    transition: 0.3s;
+  }
+  .service-card:hover .service-icon { background: var(--secondary); color: var(--dark); transform: rotateY(360deg); }
+  .service-card h3 { font-size: 20px; margin-bottom: 10px; color: var(--dark); }
+  .service-card p { color: var(--gray); font-size: 14px; }
+
+  /* ===== CONTACT ===== */
+  .contact { background: var(--dark); color: white; }
+  .contact .section-header h2 { color: white; }
+  .contact .section-header p { color: rgba(255,255,255,0.7); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.05);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: 0.3s;
+  }
+  .contact-card:hover { background: var(--primary); transform: translateY(-5px); }
+  .contact-card i { font-size: 36px; color: var(--secondary); margin-bottom: 20px; }
+  .contact-card h3 { margin-bottom: 10px; font-size: 20px; }
+  .contact-card p { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.6; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #0a0a0a;
+    color: white;
+    padding: 70px 8% 20px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 50px;
+    margin-bottom: 50px;
+  }
+  .footer-col h3 { color: var(--secondary); margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 22px; }
+  .footer-col h4 { margin-bottom: 20px; font-size: 18px; position: relative; padding-bottom: 10px; }
+  .footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--primary);
+  }
+  .footer-col p, .footer-col a { color: rgba(255,255,255,0.7); text-decoration: none; line-height: 2; font-size: 14px; transition: 0.3s; }
+  .footer-col a:hover { color: var(--secondary); padding-left: 5px; }
+  .footer-col ul { list-style: none; }
+  .social-links { display: flex; gap: 12px; margin-top: 20px; }
+  .social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: 0.3s;
+  }
+  .social-links a:hover { background: var(--primary); transform: translateY(-3px); }
+  
+  .newsletter-form {
+    display: flex;
+    margin-top: 15px;
+  }
+  .newsletter-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 30px 0 0 30px;
+    outline: none;
+    font-family: inherit;
+  }
+  .newsletter-form button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 0 30px 30px 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .newsletter-form button:hover { background: var(--primary-dark); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 25px;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+  }
+  .footer-bottom span { color: var(--primary); }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  .reveal { opacity: 0; transform: translateY(50px); transition: 0.8s; }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 968px) {
+    .nav-links {
+      position: fixed;
+      top: 70px;
+      right: -100%;
+      flex-direction: column;
+      background: var(--dark);
+      width: 70%;
+      height: calc(100vh - 70px);
+      padding: 40px;
+      transition: 0.4s;
+    }
+    .nav-links.active { right: 0; }
+    .menu-toggle { display: block; }
+    .hero-content h1 { font-size: 48px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .about-grid, .footer-grid, .contact-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item:nth-child(1) { grid-column: span 2; }
+    section { padding: 70px 5%; }
+    .section-header h2 { font-size: 36px; }
+  }
+  @media (max-width: 500px) {
+    .hero-content h1 { font-size: 36px; }
+    .stats { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item:nth-child(1) { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="logo">
+    <i class="fas fa-pizza-slice"></i>
+    Italiano<span>.</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-btn">Order Now</a>
+  <div class="menu-toggle" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+</nav>
+
+<!-- ===== HERO SLIDER ===== -->
+<section class="hero" id="home">
+  <div class="slide slide-1 active">
+    <div class="hero-content">
+      <span class="badge">⭐ 4.7 Rating · 241 Reviews</span>
+      <h1>Authentic <span>Italian</span> Pizza & Burgers</h1>
+      <p>Experience the perfect blend of Italian flavors and juicy burgers in the heart of Rawalpindi. Crafted with love, served with passion.</p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn btn-primary"><i class="fas fa-utensils"></i> Explore Menu</a>
+        <a href="#contact" class="btn btn-secondary"><i class="fas fa-phone"></i> Order Now</a>
+      </div>
+    </div>
+  </div>
+  <div class="slide slide-2">
+    <div class="hero-content">
+      <span class="badge">🔥 Freshly Baked Daily</span>
+      <h1>Premium <span>Hand-Tossed</span> Pizzas</h1>
+      <p>From classic Margherita to our signature Bar BQ Pizza — every bite is a taste of Italy made in Rawalpindi.</p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn btn-primary"><i class="fas fa-pizza-slice"></i> View Pizzas</a>
+        <a href="#contact" class="btn btn-secondary"><i class="fas fa-map-marker-alt"></i> Visit Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="slide slide-3">
+    <div class="hero-content">
+      <span class="badge">🍔 Crispy & Juicy Burgers</span>
+      <h1>The <span>Zinger</span> Burger Experience</h1>
+      <p>Crispy chicken, fresh veggies, and our secret sauce. The Zinger Burger is a crowd favorite starting at Rs 650.</p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn btn-primary"><i class="fas fa-hamburger"></i> Try Burgers</a>
+        <a href="#contact" class="btn btn-secondary"><i class="fas fa-truck"></i> Delivery</a>
+      </div>
+    </div>
+  </div>
+  <div class="slide slide-4">
+    <div class="hero-content">
+      <span class="badge">⏰ Open Until 2 AM</span>
+      <h1>Craving Food at <span>Midnight?</span></h1>
+      <p>We're here for you! Open late so you can satisfy your hunger whenever it strikes. Dine-in, pickup, or delivery.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary"><i class="fas fa-clock"></i> Hours</a>
+        <a href="tel:03215669674" class="btn btn-secondary"><i class="fas fa-phone"></i> Call Now</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider-controls">
+    <div class="slider-dot active" data-slide="0"></div>
+    <div class="slider-dot" data-slide="1"></div>
+    <div class="slider-dot" data-slide="2"></div>
+    <div class="slider-dot" data-slide="3"></div>
+  </div>
+</section>
+
+<!-- ===== STATS BAR ===== -->
+<div class="stats">
+  <div class="stat-item reveal">
+    <h3>4.7★</h3>
+    <p>Customer Rating</p>
+  </div>
+  <div class="stat-item reveal">
+    <h3>241+</h3>
+    <p>Happy Reviews</p>
+  </div>
+  <div class="stat-item reveal">
+    <h3>342+</h3>
+    <p>Photos Shared</p>
+  </div>
+  <div class="stat-item reveal">
+    <h3>15K+</h3>
+    <p>Orders Served</p>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-img reveal">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="Italian Pizza">
+      <div class="floating-card">
+        <i class="fas fa-award"></i>
+        <div>
+          <h4>Since 2018</h4>
+          <p>Trusted by thousands</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-content reveal">
+      <span class="tag" style="color:var(--primary); font-weight:600; letter-spacing:3px;">OUR STORY</span>
+      <h2>Welcome to <span>Italiano</span> Pizza & Burgers</h2>
+      <p>Located in the heart of Satellite Town, Rawalpindi, Italiano Pizza and Burgers has been serving authentic Italian flavors with a desi twist since 2018. Our chefs craft every pizza with hand-tossed dough, fresh ingredients, and a passion for perfection.</p>
+      <p>From our signature Bar BQ Pizza to the legendary Zinger Burger, every dish tells a story of quality and taste. We're not just a restaurant — we're a destination for food lovers.</p>
+      <ul class="features-list">
+        <li><i class="fas fa-check"></i> Fresh, locally sourced ingredients</li>
+        <li><i class="fas fa-check"></i> Hand-tossed dough made daily</li>
+        <li><i class="fas fa-check"></i> Open late until 2 AM</li>
+        <li><i class="fas fa-check"></i> Free Wi-Fi for all customers</li>
+      </ul>
+      <a href="#menu" class="btn btn-primary">Discover Our Menu <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MENU / CATEGORIES ===== -->
+<section class="categories" id="menu">
+  <div class="section-header reveal">
+    <span class="tag">OUR MENU</span>
+    <h2>Explore Our <span style="color:var(--primary);">Delicious</span> Categories</h2>
+    <p>From sizzling pizzas to crispy burgers, we have something for every craving</p>
+  </div>
+
+  <div class="category-filters reveal">
+    <button class="filter-btn active" data-filter="all">All Items</button>
+    <button class="filter-btn" data-filter="pizza">Pizzas</button>
+    <button class="filter-btn" data-filter="burger">Burgers</button>
+    <button class="filter-btn" data-filter="special">Specials</button>
+    <button class="filter-btn" data-filter="drinks">Drinks</button>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-card reveal" data-category="pizza">
+      <div class="menu-img">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500" alt="Bar BQ Pizza">
+        <span class="menu-badge">BESTSELLER</span>
+      </div>
+      <div class="menu-info">
+        <h3>Bar BQ Pizza</h3>
+        <p>Smoky BBQ sauce, grilled chicken, onions & mozzarella</p>
+        <div class="menu-footer">
+          <div class="price">Rs 1,200 <small>onwards</small></div>
+          <button class="add-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-category="pizza">
+      <div class="menu-img">
+        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500" alt="Pizza XL">
+        <span class="menu-badge">XL SIZE</span>
+      </div>
+      <div class="menu-info">
+        <h3>Pizza XL 15" - 12 Slices</h3>
+        <p>Each Fajita Flavor - 15 inch, 12 slices, perfect for sharing</p>
+        <div class="menu-footer">
+          <div class="price">Rs 2,500 <small>onwards</small></div>
+          <button class="add-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-category="burger">
+      <div class="menu-img">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" alt="Zinger Burger">
+        <span class="menu-badge">CHEF'S PICK</span>
+      </div>
+      <div class="menu-info">
+        <h3>Zinger Burger</h3>
+        <p>Crispy chicken fillet, fresh lettuce, signature sauce</p>
+        <div class="menu-footer">
+          <div class="price">Rs 650 <small>onwards</small></div>
+          <button class="add-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-category="pizza">
+      <div class="menu-img">
+        <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=500" alt="Margherita">
+      </div>
+      <div class="menu-info">
+        <h3>Classic Margherita</h3>
+        <p>Fresh mozzarella, basil, tomatoes & olive oil</p>
+        <div class="menu-footer">
+          <div class="price">Rs 900 <small>onwards</small></div>
+          <button class="add-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-category="special">
+      <div class="menu-img">
+        <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500" alt="Pizza Deal">
+        <span class="menu-badge">DEAL</span>
+      </div>
+      <div class="menu-info">
+        <h3>Family Pizza Deal</h3>
+        <p>2 Large Pizzas + 4 Drinks + Garlic Bread</p>
+        <div class="menu-footer">
+          <div class="price">Rs 3,000 <small>onwards</small></div>
+          <button class="add-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-category="burger">
+      <div class="menu-img">
+        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=500" alt="Cheese Burger">
+      </div>
+      <div class="menu-info">
+        <h3>Double Cheese Burger</h3>
+        <p>Double beef patty, double cheese, pickles & sauce</p>
+        <div class="menu-footer">
+          <div class="price">Rs 850 <small>onwards</small></div>
+          <button class="add-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-category="drinks">
+      <div class="menu-img">
+        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500" alt="Cold Drinks">
+      </div>
+      <div class="menu-info">
+        <h3>Cold Beverages</h3>
+        <p>Fresh juices, sodas, milkshakes & chilled drinks</p>
+        <div class="menu-footer">
+          <div class="price">Rs 150 <small>onwards</small></div>
+          <button class="add-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-category="special">
+      <div class="menu-img">
+        <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=500" alt="Special Combo">
+        <span class="menu-badge">HOT 🔥</span>
+      </div>
+      <div class="menu-info">
+        <h3>Burger & Pizza Combo</h3>
+        <p>1 Zinger Burger + 1 Personal Pizza + Drink</p>
+        <div class="menu-footer">
+          <div class="price">Rs 1,500 <small>onwards</small></div>
+          <button class="add-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery" id="gallery">
+  <div class="section-header reveal">
+    <span class="tag">GALLERY</span>
+    <h2>Our <span style="color:var(--primary);">Food</span> in Pictures</h2>
+    <p>342+ photos and counting — see what makes Italiano special</p>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="Pizza">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" alt="Burger">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500" alt="Food">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=500" alt="Burger">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500" alt="Pizza">
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPECIAL OFFER ===== -->
+<section class="special-offer">
+  <div class="section-header reveal">
+    <span class="tag" style="color:var(--secondary);">LIMITED TIME</span>
+    <h2>Special <span style="font-style:italic;">Yummy & Cheezious</span> Deal</h2>
+    <p>Love pizza? Love burgers? Get the best of both worlds with our exclusive combo offers!</p>
+    <div class="offer-box">🎉 Buy 1 Get 1 FREE on Zinger Burgers 🎉</div>
+    <br>
+    <a href="tel:03215669674" class="btn" style="background:white; color:var(--primary);"><i class="fas fa-phone"></i> Call: 0321 5669674</a>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services">
+  <div class="section-header reveal">
+    <span class="tag">SERVICES</span>
+    <h2>Why Choose <span style="color:var(--primary);">Italiano?</span></h2>
+    <p>We go above and beyond to make your dining experience memorable</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-utensils"></i></div>
+      <h3>Dine-In</h3>
+      <p>Comfortable seating with cozy ambiance for the perfect family meal</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-shopping-bag"></i></div>
+      <h3>Order Pickup</h3>
+      <p>Quick pickup service — order ahead and skip the wait</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-truck"></i></div>
+      <h3>Free Delivery</h3>
+      <p>Hot, fresh food delivered straight to your doorstep</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-leaf"></i></div>
+      <h3>Vegetarian Options</h3>
+      <p>Wide range of delicious vegetarian dishes available</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-tree"></i></div>
+      <h3>Outdoor Seating</h3>
+      <p>Enjoy your meal in our beautiful outdoor seating area</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-wifi"></i></div>
+      <h3>Free Wi-Fi</h3>
+      <p>Stay connected with complimentary high-speed internet</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="reviews">
+  <div class="section-header reveal">
+    <span class="tag">TESTIMONIALS</span>
+    <h2>What Our <span style="color:var(--primary);">Customers</span> Say</h2>
+    <p>4.7 stars from 241+ happy customers — don't just take our word for it</p>
+  </div>
+  <div class="testimonial-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+      <p>"Best pizza in Rawalpindi! The Bar BQ Pizza is absolutely divine. Crust is perfect, toppings are fresh. My family loves it!"</p>
+      <div class="reviewer">
+        <img src="https://i.pravatar.cc/100?img=12" alt="Ahmed">
+        <div>
+          <h4>Ahmed Khan</h4>
+          <span>Regular Customer</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+      <p>"The Zinger Burger is to die for! Crispy, juicy, and packed with flavor. Plus their delivery is super fast. Highly recommend!"</p>
+      <div class="reviewer">
+        <img src="https://i.pravatar.cc/100?img=47" alt="Sara">
+        <div>
+          <h4>Sara Malik</h4>
+          <span>Food Blogger</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+      </div>
+      <p>"We order every weekend! The Pizza XL is huge and perfect for family gatherings. Value for money is unbeatable in the area."</p>
+      <div class="reviewer">
+        <img src="https://i.pravatar.cc/100?img=33" alt="Bilal">
+        <div>
+          <h4>Bilal Hussain</h4>
+          <span>Loyal Customer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="section-header reveal">
+    <span class="tag" style="color:var(--secondary);">GET IN TOUCH</span>
+    <h2>Visit Us <span style="color:var(--secondary);">Today</span></h2>
+    <p>We're located in the heart of Rawalpindi, ready to serve you the best food in town</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card reveal">
+      <i class="fas fa-map-marker-alt"></i>
+      <h3>Our Location</h3>
+      <p>D-797 Fifth Rd, D Block Block D Satellite Town, Rawalpindi, 46000</p>
+    </div>
+    <div class="contact-card reveal">
+      <i class="fas fa-clock"></i>
+      <h3>Opening Hours</h3>
+      <p>Mon - Sun<br>12:00 PM - 2:00 AM</p>
+    </div>
+    <div class="contact-card reveal">
+      <i class="fas fa-phone"></i>
+      <h3>Contact Us</h3>
+      <p>Phone: 0321 5669674<br>WhatsApp: wa.me/03215669674</p>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:50px;" class="reveal">
+    <a href="https://wa.me/923215669674" class="btn btn-primary" style="background:#25D366;"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
+    <a href="tel:03215669674" class="btn btn-secondary"><i class="fas fa-phone"></i> Call Now</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h3><i class="fas fa-pizza-slice"></i> Italiano.</h3>
+      <p>Serving authentic Italian pizzas and juicy burgers in the heart of Rawalpindi since 2018. Quality, taste, and customer satisfaction is our promise.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/923215669674"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#menu">Our Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Info</h4>
+      <ul>
+        <li><a href="tel:03215669674"><i class="fas fa-phone"></i> 0321 5669674</a></li>
+        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Satellite Town, Rawalpindi</a></li>
+        <li><a href="#"><i class="fas fa-clock"></i> 12 PM - 2 AM Daily</a></li>
+        <li><a href="https://wa.me/923215669674"><i class="fab fa-whatsapp"></i> WhatsApp Order</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Newsletter</h4>
+      <p>Subscribe to get special offers, new menu updates, and exclusive deals!</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing! 🎉');">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2024 <span>Italiano Pizza and Burgers</span>. All Rights Reserved. | Crafted with ❤️ for food lovers
+  </div>
+</footer>
+
+<script>
+  // ===== MOBILE MENU =====
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+  document.querySelectorAll('.nav-links a').forEach(link => 
+    link.addEventListener('click', () => navLinks.classList.remove('active'))
+  );
+
+  // ===== NAVBAR SCROLL =====
+  window.addEventListener('scroll', () => {
+    document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ===== HERO SLIDER =====
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  let currentSlide = 0;
+  
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    currentSlide = index;
+  }
+  
+  dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
+  
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }, 5000);
+
+  // ===== MENU FILTER =====
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const menuCards = document.querySelectorAll('.menu-card');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      menuCards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
+      });
+    });
+  });
+
+  // ===== SCROLL REVEAL =====
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('active');
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // ===== SMOOTH SCROLL =====
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // ===== ADD TO CART EFFECT =====
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.innerHTML = '<i class="fas fa-check"></i>';
+      this.style.background = '#25D366';
+      setTimeout(() => {
+        this.innerHTML = '<i class="fas fa-plus"></i>';
+        this.style.background = '';
+      }, 1500);
+    });
+  });
+</script>
+
+</body>
+</html>
